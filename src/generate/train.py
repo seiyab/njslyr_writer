@@ -2,22 +2,24 @@ import warnings
 warnings.simplefilter('ignore', DeprecationWarning)
 import pickle
 import json
-from os import listdir, chdir
-import sys
+from pathlib import Path
 from collections import Counter
 from argparse import ArgumentParser
+import string
 import numpy as np
 from chainer import optimizers, Variable
 from rnn import RNN
 
-def readbatch(batch_size=10, fill=-1):
-    tweets = None
-    while tweets is None:
-        try:
-            with open('translated/' + np.random.choice(listdir("translated")), 'r') as f:
-                tweets = np.random.choice(json.load(f), size=batch_size)
-        except:
-            continue
+preprocessed_dir = Path('/preprocessed')
+models_dir = Path('/models')
+
+def jsonload(path):
+    with open(path, 'r') as f:
+        return json.load(path)
+
+def readbatch(scenario_num=3, batch_size=30, fill=-1):
+    scenarios = np.random.choice((preprocessed_dir / 'tokens').glob('**/*.json'), scenario_num)
+    tweets = np.random.choice(sum(map(jsonload, scenarios), []), batch_size)
     data = np.ones([batch_size, max(map(len, tweets))], dtype=np.int32) * fill 
     for i, tweet in enumerate(tweets):
         data[i,:len(tweet)] = tweet
@@ -25,23 +27,17 @@ def readbatch(batch_size=10, fill=-1):
 
 def get_args():
     parser = ArgumentParser()
-    parser.add_argument('-m', '--model', dest='model')
     parser.add_argument('-i', '--iter', type=int, default=20000)
     parser.add_argument('-n', '--n_unit', type=int, default=40)
-    parser.add_argument('-z', '--optimizer', type=str, default="Adam")
+    parser.add_argument('-z', '--optimizer', type=str, default="MomentumSGD")
     return parser.parse_args()
 
 def main():
-    chdir('/home/ninja')
     args = get_args()
-    savefile = args.model
-    if not savefile.endswith('.pkl'):
-        raise ValueError('filename must end with .pkl')
-    with open('translated/dicts/words.json', 'r') as f:
-        words = json.load(f)
-    with open('translated/dicts/bag_of_ids.json', 'r') as f:
+    with open(preprocessed_dir / 'dictionaries' / 'word2idx.json', 'r') as f:
+        word2idx = json.load(f)
+    with open(preprocessed_dir / 'dictionaries' / 'bag_of_words.json', 'r') as f:
         bow = {int(k):x for k, x in json.load(f).items()}
-    word2ind = {w: i for i, w in enumerate(words)}
 
     lstm = RNN(args.n_unit, bow)
     optimizer = getattr(optimizers, args.optimizer)()
@@ -54,7 +50,10 @@ def main():
         lstm.reset_state()
         optimizer.update(lstm.compute_loss, seq)
 
-    with open (args.model, 'wb') as f:
+    (models / 'generators').mkdir(exist_ok=True)
+    dump_name = ''.join(np.random.choice(string.letter + string.digits, 8)) + '.pkl'
+    with open (models / 'generators' / dump_name, 'wb') as f:
         pickle.dump(lstm, f)
 
-main()
+if __name__ == '__main__':
+    main()
