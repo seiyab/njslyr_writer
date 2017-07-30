@@ -20,7 +20,7 @@ def write(generator, head=None):
     with open(preprocessed_dir / 'dictionaries' / 'word2idx.json', 'r') as f:
         word2idx = json.load(f)
     words = [-1] * len(word2idx)
-    for w, i in word2idx:
+    for w, i in word2idx.items():
         words[i] = w
     if head is None:
         head = pick_head()
