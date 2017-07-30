@@ -21,7 +21,7 @@ def main():
                 preprocessed_sentences = []
                 for sentence in sentences:
                     preprocessed_sentences = []
-                    tokens = parse(sentense)
+                    tokens = parse(sentence)
                     for token in tokens:
                         if token not in word2idx:
                             word2idx[token] = len(word2idx)
