@@ -14,8 +14,8 @@ def main():
     dictionary_dir.mkdir(exist_ok=True)
 
     word2idx = {}
-    for chapter in filter(lambda x: x.is_dir(), data_dir):
-        for scenario in filter(lambda x: x.suffix=='.json', chapter):
+    for chapter in filter(lambda x: x.is_dir(), data_dir.iterdir()):
+        for scenario in filter(lambda x: x.suffix=='.json', chapter.iterdir()):
             with open(scenario, 'r') as f:
                 sentences = json.load(f)
                 preprocessed_sentences = []
