@@ -51,7 +51,7 @@ def main():
         optimizer.update(lstm.compute_loss, seq)
 
     (models_dir / 'generators').mkdir(exist_ok=True)
-    dump_name = ''.join(np.random.choice(string.letter + string.digits, 8)) + '.pkl'
+    dump_name = ''.join(np.random.choice(string.ascii_letters + string.digits, 8)) + '.pkl'
     with open (models_dir / 'generators' / dump_name, 'wb') as f:
         pickle.dump(lstm, f)
 
