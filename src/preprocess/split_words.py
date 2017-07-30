@@ -34,6 +34,6 @@ def main():
 
 def parse(sentence):
     words = m.parse(sentence).split("\n")[:-1]
-    return map(lambda x: x.split("\t")[0], tokens)
+    return map(lambda x: x.split("\t")[0], words)
 
 main()
