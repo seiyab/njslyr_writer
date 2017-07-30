@@ -9,7 +9,7 @@ def main():
     for jsonfile in preprocessed_dir.glob('*.json'):
         with open(jsonfile, 'r') as f:
             c.update(sum(json.load(f), []))
-    with open(preprocessed_dir / 'dictionaries' / 'bag_of_words.json') as f:
+    with open(preprocessed_dir / 'dictionaries' / 'bag_of_words.json', 'w') as f:
         json.dump(dict(c), f)
 
 if __name__ == "__main__":
