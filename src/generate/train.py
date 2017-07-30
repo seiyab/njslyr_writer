@@ -50,9 +50,9 @@ def main():
         lstm.reset_state()
         optimizer.update(lstm.compute_loss, seq)
 
-    (models / 'generators').mkdir(exist_ok=True)
+    (models_dir / 'generators').mkdir(exist_ok=True)
     dump_name = ''.join(np.random.choice(string.letter + string.digits, 8)) + '.pkl'
-    with open (models / 'generators' / dump_name, 'wb') as f:
+    with open (models_dir / 'generators' / dump_name, 'wb') as f:
         pickle.dump(lstm, f)
 
 if __name__ == '__main__':
