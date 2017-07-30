@@ -15,7 +15,7 @@ models_dir = Path('/models')
 
 def jsonload(path):
     with open(path, 'r') as f:
-        return json.load(path)
+        return json.load(f)
 
 def readbatch(scenario_num=3, batch_size=30, fill=-1):
     scenarios = np.random.choice(list(preprocessed_dir.glob('tokens/*.json')), scenario_num)
