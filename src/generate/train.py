@@ -18,7 +18,7 @@ def jsonload(path):
         return json.load(path)
 
 def readbatch(scenario_num=3, batch_size=30, fill=-1):
-    scenarios = np.random.choice((preprocessed_dir / 'tokens').glob('**/*.json'), scenario_num)
+    scenarios = np.random.choice(list(preprocessed_dir.glob('tokens/*.json')), scenario_num)
     tweets = np.random.choice(sum(map(jsonload, scenarios), []), batch_size)
     data = np.ones([batch_size, max(map(len, tweets))], dtype=np.int32) * fill 
     for i, tweet in enumerate(tweets):
