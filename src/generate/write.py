@@ -3,6 +3,7 @@ warnings.simplefilter('ignore', DeprecationWarning)
 import pickle
 import json
 from argparse import ArgumentParser
+from pathlib import Path
 import numpy as np
 from rnn import RNN
 
