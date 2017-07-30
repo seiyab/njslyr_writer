@@ -20,7 +20,7 @@ def main():
                 sentences = json.load(f)
                 preprocessed_sentences = []
                 for sentence in sentences:
-                    preprocessed_sentences = []
+                    preprocessed_sentence = []
                     tokens = parse(sentence)
                     for token in tokens:
                         if token not in word2idx:
