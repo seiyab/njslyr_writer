@@ -25,10 +25,10 @@ def write(generator, head=None):
     if head is None:
         head = pick_head()
     else:
-        head = word2ind[head]
+        head = word2idx[head]
     with open(generator, 'rb') as f:
         lstm = pickle.load(f)
-    generated = "".join([words[i] for i in lstm.sample(head, word2ind['EOS'])])
+    generated = "".join([words[i] for i in lstm.sample(head, word2idx['EOS'])])
     return generated.rstrip('EOS')
 
 def get_args():
