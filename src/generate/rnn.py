@@ -1,12 +1,6 @@
 import warnings
 warnings.simplefilter('ignore', DeprecationWarning)
-import pickle
-import json
-from os import listdir
-import sys
-from collections import Counter
 import numpy as np
-import chainer
 from chainer import optimizers, Chain, Variable
 import chainer.functions as F
 import chainer.links as L
