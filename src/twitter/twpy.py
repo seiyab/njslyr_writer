@@ -1,7 +1,9 @@
 import tweepy
 import json
 
-with open("./twitter_auth.json") as f:
+twitter_config_dir = Path('/storage/twitter')
+
+with open(twitter_config_dir / "account.json") as f:
     twitter_auth = json.load(f)
 
 auth = tweepy.OAuthHandler(twitter_auth["CONSUMER_KEY"], twitter_auth["CONSUMER_SECRET"])
