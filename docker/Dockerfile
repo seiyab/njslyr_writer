@@ -28,6 +28,7 @@ RUN /usr/lib/mecab/mecab-dict-index \
     -t utf8 /mecab-dict/chado.csv \
  && echo "userdic = /mecab-dict/chado.dic" >> /var/lib/mecab/dic/ipadic-utf8/dicrc
 
+ENV PYTHONPATH $PYTHONPATH:/src
 
 WORKDIR /src
 
