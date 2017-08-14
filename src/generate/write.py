@@ -8,7 +8,6 @@ import numpy as np
 from rnn import RNN
 
 preprocessed_dir = Path('/preprocessed')
-models_dir = Path('/models')
 
 def pick_head():
     with open(np.random.choice(list(preprocessed_dir.glob('tokens/*.json'))), 'r') as f:
