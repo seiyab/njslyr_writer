@@ -45,7 +45,7 @@ def update_lastid(i):
         json.dump(i, f)
 
 def get_lastid():
-    with open(twitter_config_dit / 'tweet_id.json', 'r') as f:
+    with open(twitter_config_dir / 'tweet_id.json', 'r') as f:
         json.load(f)
 
 if __name__ == '__main__':
