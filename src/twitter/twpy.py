@@ -1,7 +1,7 @@
 import tweepy
 import json
 
-twitter_config_dir = Path('/storage/twitter')
+twitter_config_dir = Path('/config/twitter')
 
 with open(twitter_config_dir / "account.json") as f:
     twitter_auth = json.load(f)

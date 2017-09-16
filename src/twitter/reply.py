@@ -7,7 +7,7 @@ from generate import write as w
 
 models_dir = Path('/models')
 dictionary_dir = Path('/preprocessed') / 'dictionaries'
-twitter_config_dir = Path('/storage/twitter')
+twitter_config_dir = Path('/config/twitter')
 
 m = MeCab.Tagger("-Ochasen")
 
