@@ -8,6 +8,7 @@ import numpy as np
 from rnn import RNN
 
 preprocessed_dir = Path('/preprocessed')
+models_dir = Path('/models')
 
 def pick_head():
     with open(np.random.choice(list(preprocessed_dir.glob('tokens/*.json'))), 'r') as f:
@@ -21,10 +22,14 @@ def write(generator, head=None):
     words = [-1] * len(word2idx)
     for w, i in word2idx.items():
         words[i] = w
+
     if head is None:
         head = pick_head()
     else:
         head = word2idx[head]
+
+    if generator is None:
+        generator = np.random.choice(list((models_dir / 'generators').iterdir()))
     with open(generator, 'rb') as f:
         lstm = pickle.load(f)
     generated = "".join([words[i] for i in lstm.sample(head, word2idx['EOS'])])
