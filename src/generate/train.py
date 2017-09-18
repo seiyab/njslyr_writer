@@ -32,6 +32,7 @@ def get_args():
     parser.add_argument('-i', '--iter', type=int, default=20000)
     parser.add_argument('-n', '--n_unit', type=int, default=40)
     parser.add_argument('-z', '--optimizer', type=str, default="MomentumSGD")
+    parser.add_argument('-o', '--output', type=str, default=None)
     return parser.parse_args()
 
 def main():
@@ -53,7 +54,8 @@ def main():
         optimizer.update(lstm.compute_loss, seq)
 
     (models_dir / 'generators').mkdir(exist_ok=True)
-    dump_name = ''.join(np.random.choice(list(string.ascii_letters + string.digits), 8)) + '.pkl'
+
+    dump_name = args.output if args.output is not None else ''.join(np.random.choice(list(string.ascii_letters + string.digits), 8)) + '.pkl'
     with open (models_dir / 'generators' / dump_name, 'wb') as f:
         pickle.dump(lstm, f)
 
