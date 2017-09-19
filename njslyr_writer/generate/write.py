@@ -5,7 +5,7 @@ import json
 from argparse import ArgumentParser
 from pathlib import Path
 import numpy as np
-from rnn import RNN
+from njslyr_writer.generate.rnn import RNN
 
 preprocessed_dir = Path('/preprocessed')
 models_dir = Path('/models')

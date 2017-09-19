@@ -10,7 +10,7 @@ from argparse import ArgumentParser
 import string
 import numpy as np
 from chainer import optimizers, Variable
-from rnn import RNN
+from njslyr_writer.generate.rnn import RNN
 
 preprocessed_dir = Path('/preprocessed')
 models_dir = Path('/models')

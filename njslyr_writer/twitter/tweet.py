@@ -2,7 +2,7 @@
 
 from pathlib import Path
 import numpy
-import twpy
+from njslyr_writer.twitter import twpy
 from generate import write as w
 
 models_dir = Path('/models')

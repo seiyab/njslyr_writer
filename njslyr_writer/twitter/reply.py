@@ -2,8 +2,8 @@
 
 from pathlib import Path
 import numpy
-import twpy
-from generate import write as w
+from njslyr_writer.twitter import twpy
+from njslyr_rwiter.generate import write as w
 
 models_dir = Path('/models')
 dictionary_dir = Path('/preprocessed') / 'dictionaries'
