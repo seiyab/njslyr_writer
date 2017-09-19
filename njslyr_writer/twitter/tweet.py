@@ -1,7 +1,7 @@
 #!/opt/conda/bin/python3
 
 from pathlib import Path
-import numpy
+import numpy as np
 from njslyr_writer.twitter import twpy
 from njslyr_writer.generate import write as w
 
