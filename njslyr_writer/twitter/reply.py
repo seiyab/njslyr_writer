@@ -23,7 +23,7 @@ def reply_all():
 def get_replies(target, count, since_id):
     at_tweets = twpy.api.search('@{}'.format(target), count=count, since_id=since_id)
     replies = [t for t in at_tweets if t.in_reply_to_screen_name==target]
-    texts = (r.text.replace('@{}'.format(target). '').strip() for r in replies)
+    texts = (r.text.replace('@{}'.format(target), '').strip() for r in replies)
     ids = (r.id for r in replies)
     screen_names = (r.user_screen_name for r in replies)
     return list(zip(texts, ids, screen_names))
