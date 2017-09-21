@@ -2,6 +2,7 @@
 
 from pathlib import Path
 import numpy
+import MeCab
 from njslyr_writer.twitter import twpy
 from njslyr_writer.generate import write as w
 
