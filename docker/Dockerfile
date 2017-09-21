@@ -3,6 +3,7 @@ FROM continuumio/miniconda3:latest
 MAINTAINER seiyab
 
 RUN apt-get update && apt-get install --yes \
+    g++ \
     libmecab-dev \
     mecab \
     mecab-ipadic \
@@ -17,6 +18,7 @@ RUN /opt/conda/bin/conda install --yes \
  && /opt/conda/bin/conda clean --yes --all
 RUN pip install --no-cache-dir\
     chainer \
+    mecab-python3 \
     tweepy
 
 # mecab config
